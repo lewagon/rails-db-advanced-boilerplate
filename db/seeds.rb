@@ -34,7 +34,7 @@ Customer.import customers
 puts "done!"
 
 puts "parsing orders..."
-offset = (Date.today - Date.new(2017, 3, 1)).to_i
+offset = (Date.today - Date.new(2018, 3, 1)).to_i
 orders = []
 CSV.foreach('db/brazilian-ecommerce/olist_orders_dataset.csv', headers: true) do |row|
   next if row["purchased_at"].nil? || row["purchased_at"] < "2017-03-01" || row["purchased_at"] > "2018-03-31"
