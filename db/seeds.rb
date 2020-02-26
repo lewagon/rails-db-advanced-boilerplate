@@ -12,6 +12,7 @@ def parse_items(klass, step)
   puts "[#{step}/6] Parsing #{pluralized_name}..."
   elements = []
   CSV.foreach("db/brazilian-ecommerce/olist_#{pluralized_name}_dataset.csv", headers: true) do |row|
+    row["name"] = Faker::Company.name if klass == Product
     elements << klass.new(row.to_hash)
   end
   import_items(elements)
