@@ -1,0 +1,3 @@
+class OrderPayment < ApplicationRecord
+  belongs_to :order
+end
