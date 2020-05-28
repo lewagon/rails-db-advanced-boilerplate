@@ -24,14 +24,12 @@ customer_ids_mapping = parse_items(Customer, 3)
 GC.start
 
 puts "[4/6] Parsing orders..."
-offset = (Date.today - Date.new(2018, 3, 1)).to_i
 orders = []
 CSV.foreach('db/brazilian-ecommerce/olist_orders_dataset.csv', headers: true) do |row|
   next if row["purchased_at"].nil? || row["purchased_at"] < "2017-03-01" || row["purchased_at"] > "2018-03-31"
 
   order = Order.new(row.to_hash)
   order.customer_id = customer_ids_mapping[row["customer_csv_id"]]
-  order.purchased_at = order.purchased_at + offset.days
   orders << order
 end
 order_ids_mapping = import_items(orders)
